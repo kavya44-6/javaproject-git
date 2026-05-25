@@ -1,132 +1,45 @@
-class Main{
-
-public static void main(String args[]){
-
-LibraryController controller=
-new LibraryController(10);
-
-LibraryView view=
-new LibraryView();
-
-controller.addBook(1,"Java");
-
-controller.addBook(2,"Python");
-
-controller.addBook(3,"C Programming");
-
-while(true){
-
-view.showMenu();
-
-int choice=
-view.getChoice();
-
-switch(choice){
-
+import java.util.Scanner;
+public class Main{
+public static void main(String[] args){
+Scanner sc=new Scanner(System.in);
+System.out.print("Enter Name:");
+String name=sc.nextLine();
+System.out.print("Enter Account No:");
+int no=sc.nextInt();
+System.out.print("Enter Balance:");
+double bal=sc.nextDouble();
+Account a=new Account(name,no,bal);
+Transaction t=new Transaction();
+Bank b=new Bank();
+int ch;
+do{
+System.out.println("\n1.Deposit");
+System.out.println("2.Withdraw");
+System.out.println("3.Check Balance");
+System.out.println("4.Exit");
+System.out.print("Enter Choice:");
+ch=sc.nextInt();
+switch(ch){
 case 1:
-
-view.displayBooks(
-
-controller.getBooks(),
-
-controller.getCount()
-
-);
-
+System.out.print("Enter Amount:");
+double d=sc.nextDouble();
+t.deposit(a,d);
 break;
-
 case 2:
-
-String search=
-
-view.getTitle(
-
-"Enter title:"
-
-);
-
-if(
-
-controller.findBook(search)
-
-!=null
-
-)
-
-view.showMessage(
-
-"Book Found"
-
-);
-
-else
-
-view.showMessage(
-
-"Book Not Found"
-
-);
-
+System.out.print("Enter Amount:");
+double w=sc.nextDouble();
+t.withdraw(a,w);
 break;
-
 case 3:
-
-String issue=
-
-view.getTitle(
-
-"Enter title:"
-
-);
-
-view.showMessage(
-
-controller.issueBook(issue)
-
-);
-
+b.details(a);
 break;
-
 case 4:
-
-String ret=
-
-view.getTitle(
-
-"Enter title:"
-
-);
-
-view.showMessage(
-
-controller.returnBook(ret)
-
-);
-
+System.out.println("Thank You");
 break;
-
-case 5:
-
-System.out.println(
-
-"Exiting..."
-
-);
-
-return;
-
 default:
-
-System.out.println(
-
-"Invalid Choice"
-
-);
-
+System.out.println("Invalid Choice");
 }
-
+}while(ch!=4);
+sc.close();
 }
-
-}
-
 }
